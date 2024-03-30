@@ -36,8 +36,7 @@ def wrangle_data(df: pd.DataFrame):
     
     # Transform representation of listing categories from numbers to strings
     df["ListingCategory"] = [ ListingCategories[i] for i in df["ListingCategory (numeric)"] ]
-
-    # Remove the time from the dates
-    # turn this (yyyy-mm-dd 00:00:00) to this (yyyy-mm-dd)
-    df["LoanDate"] = df["LoanOriginationDate"].apply(lambda x: x.split(" ")[0] )
+    
+    # Turn data origination date to datetime type
+    df["LoanOriginationDate"] = pd.to_datetime(df["LoanOriginationDate"])
     return df
